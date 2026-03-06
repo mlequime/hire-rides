@@ -14,7 +14,7 @@ export default async function Header() {
 	const logoImage = logo?.image?.dark || logo?.image?.default
 
 	return (
-		<Wrapper className="frosted-glass border-ink/10 bg-canvas max-md:header-open:shadow-lg sticky top-0 z-10 border-b">
+		<Wrapper className="frosted-glass border-ink/10 bg-canvas max-md:header-open:shadow-lg sticky top-0 z-20 border-b">
 			<div
 				className={cn(
 					css.header,
@@ -23,23 +23,23 @@ export default async function Header() {
 			>
 				<div className="[grid-area:logo]">
 					<Link
-						className={cn('h4 md:h3 grid', logo?.image && 'max-w-3xs')}
+						className={cn('h5 md:h4 grid', logo?.image && 'max-w-3xs')}
 						href="/"
 					>
-						{logoImage ? (
-							<Img
-								className="inline-block max-h-[1.2em] w-auto"
-								image={logoImage}
-								alt={logo?.name || title}
-							/>
-						) : (
-							<span className="text-gradient">{title}</span>
-						)}
+						<span>
+							Hire<em className="text-accent">Fairground</em>Rides
+						</span>
 					</Link>
 				</div>
 
 				<Navigation />
 
+				<div className="text-sm [grid-area:phone]">
+					<div>Call anytime on</div>
+					<a href="tel:+447940536535" className="text-accent font-medium">
+						+44 7940 536535
+					</a>
+				</div>
 				<CTAList
 					ctas={ctas}
 					className="max-md:header-closed:hidden [grid-area:ctas] max-md:*:w-full md:ms-auto"

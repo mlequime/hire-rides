@@ -248,10 +248,11 @@
 	font-weight: 600;
 	font-size: clamp(3.8rem, 5.5vw, 6.2rem);
 	line-height: 0.95;
-	letter-spacing: -0.02em;
+	letter-spacing: -0.025em;
 	font-style: italic;
 	text-shadow: 2px 2px 0 rgb(90 70 40 / 0.35);
 	text-wrap: balance;
+	margin-bottom: 1rem;
 }
 
 @utility display-lg {
@@ -321,6 +322,9 @@
 	@apply from-accent/3 to-accent bg-linear-to-br bg-clip-text text-transparent;
 }
 
+@utility text-accent {
+	color: var(--color-accent);
+}
 /* ════════════════════════════════
    DECORATIVE ELEMENTS
 ════════════════════════════════ */
@@ -628,7 +632,21 @@
 /* layout */
 
 @utility section {
-	@apply mx-auto max-w-screen-xl p-8 max-md:px-4 md:py-12;
+	@apply mx-auto p-8 max-md:px-4 md:py-12;
+
+	&:nth-child(even) {
+		@apply bg-canvas-white;
+		border-top: 3px solid;
+		border-bottom: 3px solid;
+		border-image: repeating-linear-gradient(
+				to right,
+				#db6572 0px,
+				#db6572 28px,
+				#ebd4ab 28px,
+				#ebd4ab 56px
+			)
+			1;
+	}
 }
 
 /* richtext */

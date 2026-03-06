@@ -6,11 +6,11 @@ import { cn } from '@/lib/utils'
 export default async function Menu() {
 	const { headerMenu } = await getSite()
 
-	const parentClassName = cn('md:px-3 md:text-center md:leading-tight')
+	const parentClassName = cn('lg:px-3 lg:text-center lg:leading-tight')
 
 	return (
 		<nav
-			className="max-md:anim-fade-to-r max-md:header-closed:hidden flex gap-y-2 [grid-area:nav] max-md:my-4 max-md:flex-col md:justify-center"
+			className="max-lg:anim-fade-to-r max-lg:header-closed:hidden flex gap-y-2 [grid-area:nav] max-lg:my-4 max-lg:flex-col lg:justify-center"
 			role="navigation"
 		>
 			{headerMenu?.items?.map((item, key) => {
@@ -20,7 +20,7 @@ export default async function Menu() {
 							<CTA
 								className={cn(
 									parentClassName,
-									'hover:link md:grid md:place-content-center',
+									'hover:link text-accent font-medium tracking-widest uppercase lg:grid lg:place-content-center',
 								)}
 								link={item}
 								key={key}

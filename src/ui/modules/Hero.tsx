@@ -40,7 +40,7 @@ export default function Hero({
 		return (
 			<section
 				className={cn(
-					'relative overflow-hidden',
+					'section relative overflow-hidden',
 					!hasImage && isDark && 'bg-ink text-canvas',
 				)}
 				{...moduleProps(props)}
@@ -48,7 +48,7 @@ export default function Hero({
 				{hasImage && (
 					<ResponsiveImg
 						img={asset}
-						className="anim-hero-zoom absolute inset-0 size-full object-cover object-center"
+						className="absolute inset-0 size-full object-cover object-center"
 						width={2400}
 						draggable={false}
 					/>
