@@ -42,7 +42,7 @@ export default function Hero({
 		return (
 			<section
 				className={cn(
-					'relative min-h-svh overflow-hidden',
+					'relative overflow-hidden',
 					!hasImage && isDark && 'bg-ink text-canvas',
 				)}
 				{...moduleProps(props)}
@@ -71,7 +71,7 @@ export default function Hero({
 				{/* Content — constrained to left ~52% */}
 				<div
 					className={cn(
-						'relative z-10 flex min-h-svh max-w-[56%] flex-col justify-center px-20 py-32 max-lg:max-w-full max-lg:px-10 max-lg:py-24',
+						'relative z-10 flex max-w-[56%] flex-col justify-center px-18 py-24 max-lg:max-w-full max-lg:px-10 max-lg:py-24',
 						isDark ? 'text-canvas' : 'text-ink',
 					)}
 				>
