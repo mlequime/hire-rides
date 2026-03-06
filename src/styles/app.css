@@ -27,15 +27,12 @@
 	--color-border-light: rgba(26, 18, 8, 0.06);
 
 	/* ── Typography ── */
-	--font-display: 'Cormorant', Georgia, serif;
+	--font-display: 'Playfair Display', 'Cormorant', Georgia, serif;
 	--font-body: 'Jost', system-ui, sans-serif;
 
 	/* ── Sizing ── */
 	--max-height-fold: calc(100svh - var(--header-height));
 }
-
-/* ── Google Fonts import ── */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Jost:ital,wght@0,200;0,300;0,400;0,500;1,300&display=swap');
 
 @custom-variant hover (&:hover);
 
@@ -248,10 +245,13 @@
 /* Display headings — larger, used in heroes and section headers */
 @utility display-xl {
 	font-family: var(--font-display);
-	font-weight: 500;
+	font-weight: 600;
 	font-size: clamp(3.8rem, 5.5vw, 6.2rem);
 	line-height: 0.95;
 	letter-spacing: -0.02em;
+	font-style: italic;
+	text-shadow: 2px 2px 0 rgb(90 70 40 / 0.35);
+	text-wrap: balance;
 }
 
 @utility display-lg {
@@ -273,7 +273,7 @@
 /* Italic display emphasis — used for red-coloured italic runs inside headings */
 @utility display-em {
 	font-style: italic;
-	font-weight: 300;
+	font-weight: 500;
 	color: var(--color-accent);
 }
 
@@ -393,7 +393,7 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.5em 1em;
+	padding: 0.75rem 1.25rem;
 	text-align: center;
 	text-shadow: none;
 	color: var(--color-ink);
@@ -768,3 +768,5 @@
 		scroll-snap-align: center;
 	}
 }
+
+/* Overrides */
