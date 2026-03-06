@@ -14,7 +14,6 @@ export default function Hero({
 	assets,
 	layout: l,
 	colorScheme: cs,
-	trustStats,
 	textAlign: ta = 'center',
 	alignItems: ai,
 	...props
@@ -25,7 +24,6 @@ export default function Hero({
 	assets: Sanity.Img[]
 	layout: 'full' | 'split'
 	colorScheme: 'light' | 'dark'
-	trustStats: { value: string; label: string }[]
 	textAlign: React.CSSProperties['textAlign']
 	alignItems: React.CSSProperties['alignItems']
 }> &
@@ -130,36 +128,6 @@ export default function Hero({
 					)}
 
 					<CTAList ctas={ctas} className="mt-12" />
-
-					{!!trustStats?.length && (
-						<div
-							className={cn(
-								'mt-14 flex flex-wrap gap-8 border-t pt-8',
-								isDark ? 'border-canvas/10' : 'border-border-light',
-							)}
-						>
-							{trustStats.map(({ value, label }, i) => (
-								<div key={i} className="flex flex-col gap-0.5">
-									<span
-										className={cn(
-											'font-display text-2xl leading-none font-semibold tracking-tight',
-											isDark ? 'text-canvas' : 'text-ink',
-										)}
-									>
-										{value}
-									</span>
-									<span
-										className={cn(
-											'technical',
-											isDark ? 'text-canvas/40' : 'text-ink/40',
-										)}
-									>
-										{label}
-									</span>
-								</div>
-							))}
-						</div>
-					)}
 				</div>
 			</section>
 		)

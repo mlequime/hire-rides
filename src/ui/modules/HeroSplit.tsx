@@ -13,6 +13,7 @@ export default function HeroSplit({
 	assets,
 	assetOnRight,
 	assetBelowContent,
+	trustStats,
 }: Partial<{
 	pretitle: string
 	content: any
@@ -20,6 +21,7 @@ export default function HeroSplit({
 	assets: Array<Sanity.Img | Sanity.Code | Sanity.CustomHTML>
 	assetOnRight: boolean
 	assetBelowContent: boolean
+	trustStats: { value: string; label: string }[]
 }>) {
 	const asset = assets?.[0]
 
@@ -50,6 +52,27 @@ export default function HeroSplit({
 				/>
 				<CTAList ctas={ctas} className="!mt-6" />
 			</div>
+
+			{!!trustStats?.length && (
+				<div
+					className={cn(
+						'border-border-light mt-14 flex flex-wrap gap-8 border-t pt-8',
+					)}
+				>
+					{trustStats.map(({ value, label }, i) => (
+						<div key={i} className="flex flex-col gap-0.5">
+							<span
+								className={cn(
+									'font-display text-ink text-2xl leading-none font-semibold tracking-tight',
+								)}
+							>
+								{value}
+							</span>
+							<span className={cn('technical text-ink/40')}>{label}</span>
+						</div>
+					))}
+				</div>
+			)}
 		</section>
 	)
 }
