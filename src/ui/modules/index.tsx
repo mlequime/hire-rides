@@ -1,5 +1,8 @@
 import AccordionList from './AccordionList'
 import BlogFrontpage from './blog/BlogFrontpage'
+import Ticker from './Ticker'
+import RideList from './RideList'
+import ContactSection from './ContactSection'
 import BlogList from './blog/BlogList'
 import BlogPostContent from './blog/PostContent'
 import Breadcrumbs from './Breadcrumbs'
@@ -48,6 +51,9 @@ const MODULE_MAP = {
 	'tabbed-content': TabbedContent,
 	'testimonial-list': TestimonialList,
 	'testimonial.featured': TestimonialFeatured,
+	ticker: Ticker,
+	'ride-list': RideList,
+	'contact-section': ContactSection,
 } as const
 
 export default function Modules({

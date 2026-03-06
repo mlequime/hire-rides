@@ -29,6 +29,9 @@ export default defineField({
 		{ type: 'tabbed-content' },
 		{ type: 'testimonial-list' },
 		{ type: 'testimonial.featured' },
+		{ type: 'ticker' },
+		{ type: 'ride-list' },
+		{ type: 'contact-section' },
 	],
 	options: {
 		insertMenu: {

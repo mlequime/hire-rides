@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 import { TfiLayoutCtaCenter } from 'react-icons/tfi'
 import { reputationBlock } from '../misc/reputation'
 import { alignItems, textAlign } from '../fragments'
@@ -15,6 +15,7 @@ export default defineType({
 		{ name: 'options' },
 	],
 	fieldsets: [
+		{ name: 'layout', options: { columns: 2 } },
 		{ name: 'alignment', options: { columns: 2 } },
 		{ name: 'image', options: { columns: 2 } },
 	],
@@ -23,6 +24,35 @@ export default defineType({
 			name: 'options',
 			title: 'Module options',
 			type: 'module-options',
+			group: 'options',
+		}),
+		defineField({
+			name: 'layout',
+			type: 'string',
+			options: {
+				list: [
+					{ title: 'Full', value: 'full' },
+					{ title: 'Split', value: 'split' },
+				],
+				layout: 'radio',
+			},
+			initialValue: 'full',
+			fieldset: 'layout',
+			group: 'options',
+		}),
+		defineField({
+			name: 'colorScheme',
+			title: 'Colour scheme',
+			type: 'string',
+			options: {
+				list: [
+					{ title: 'Dark', value: 'dark' },
+					{ title: 'Light', value: 'light' },
+				],
+				layout: 'radio',
+			},
+			initialValue: 'dark',
+			fieldset: 'layout',
 			group: 'options',
 		}),
 		defineField({
@@ -50,6 +80,26 @@ export default defineType({
 			of: [{ type: 'img' }],
 			validation: (Rule) => Rule.max(1),
 			group: 'asset',
+		}),
+		defineField({
+			name: 'trustStats',
+			title: 'Trust stats',
+			description: 'Stat items shown below CTAs in split layout',
+			type: 'array',
+			of: [
+				defineArrayMember({
+					type: 'object',
+					fields: [
+						defineField({ name: 'value', type: 'string' }),
+						defineField({ name: 'label', type: 'string' }),
+					],
+					preview: {
+						select: { value: 'value', label: 'label' },
+						prepare: ({ value, label }) => ({ title: value, subtitle: label }),
+					},
+				}),
+			],
+			group: 'content',
 		}),
 		defineField({
 			...(alignItems as any),

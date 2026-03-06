@@ -288,14 +288,14 @@
 	letter-spacing: 0.28em;
 	text-transform: uppercase;
 	color: var(--color-gold);
-}
 
-@utility eyebrow::before {
-	content: '';
-	width: 24px;
-	height: 1px;
-	background: var(--color-gold);
-	flex-shrink: 0;
+	&:before {
+		content: '';
+		width: 24px;
+		height: 1px;
+		background: var(--color-gold);
+		flex-shrink: 0;
+	}
 }
 
 /* Eyebrow on dark backgrounds */

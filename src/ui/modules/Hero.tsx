@@ -12,6 +12,9 @@ export default function Hero({
 	content,
 	ctas,
 	assets,
+	layout: l,
+	colorScheme: cs,
+	trustStats,
 	textAlign: ta = 'center',
 	alignItems: ai,
 	...props
@@ -20,21 +23,159 @@ export default function Hero({
 	content: any
 	ctas: Sanity.CTA[]
 	assets: Sanity.Img[]
+	layout: 'full' | 'split'
+	colorScheme: 'light' | 'dark'
+	trustStats: { value: string; label: string }[]
 	textAlign: React.CSSProperties['textAlign']
 	alignItems: React.CSSProperties['alignItems']
 }> &
 	Sanity.Module) {
 	const hasImage = !!assets?.[0]
 	const asset = assets?.[0]
-
+	const layout = stegaClean(l) ?? 'full'
+	const isDark = stegaClean(cs) !== 'light'
 	const textAlign = stegaClean(ta)
 	const alignItems = stegaClean(ai)
 
+	// ── Split layout ──────────────────────────────────────────────────────────
+	if (layout === 'split') {
+		return (
+			<section
+				className={cn(
+					'relative min-h-svh overflow-hidden',
+					!hasImage && isDark && 'bg-ink text-canvas',
+				)}
+				{...moduleProps(props)}
+			>
+				{hasImage && (
+					<ResponsiveImg
+						img={asset}
+						className="anim-hero-zoom absolute inset-0 size-full object-cover object-center"
+						width={2400}
+						draggable={false}
+					/>
+				)}
+
+				{/* Gradient scrim — left-to-transparent so content reads clearly */}
+				{hasImage && (
+					<div
+						className="pointer-events-none absolute inset-0 z-[1]"
+						style={{
+							background: isDark
+								? 'linear-gradient(to right, #1a1208 25%, rgba(26,18,8,0.85) 45%, rgba(26,18,8,0) 70%)'
+								: 'linear-gradient(to right, #f8f5ef 25%, rgba(248,245,239,0.9) 45%, rgba(248,245,239,0) 70%)',
+						}}
+					/>
+				)}
+
+				{/* Content — constrained to left ~52% */}
+				<div
+					className={cn(
+						'relative z-10 flex min-h-svh max-w-[56%] flex-col justify-center px-20 py-32 max-lg:max-w-full max-lg:px-10 max-lg:py-24',
+						isDark ? 'text-canvas' : 'text-ink',
+					)}
+				>
+					{pretitle && (
+						<p
+							className={cn(
+								'eyebrow mb-10',
+								isDark ? 'text-gold/75 [&::before]:bg-gold/70' : '',
+							)}
+						>
+							{stegaClean(pretitle)}
+						</p>
+					)}
+
+					{content && (
+						<PortableText
+							value={content}
+							components={{
+								block: {
+									h1: ({ children }) => (
+										<h1 className="display-xl">{children}</h1>
+									),
+									h2: ({ children }) => (
+										<h2 className="display-lg">{children}</h2>
+									),
+									normal: ({ children }) => (
+										<p
+											className={cn(
+												'mt-6 max-w-[420px] text-base leading-[1.85] font-light',
+												isDark ? 'text-canvas/70' : 'text-ink/70',
+											)}
+										>
+											{children}
+										</p>
+									),
+								},
+								marks: {
+									em: ({ children }) => (
+										<em className="display-em">{children}</em>
+									),
+									strong: ({ children }) => (
+										<strong className="font-medium">{children}</strong>
+									),
+								},
+								types: {
+									'custom-html': ({ value }) => <CustomHTML {...value} />,
+									'reputation-block': ({ value }) => (
+										<Reputation
+											className="!mt-4"
+											reputation={value.reputation}
+										/>
+									),
+								},
+							}}
+						/>
+					)}
+
+					<CTAList ctas={ctas} className="mt-12" />
+
+					{!!trustStats?.length && (
+						<div
+							className={cn(
+								'mt-14 flex flex-wrap gap-8 border-t pt-8',
+								isDark ? 'border-canvas/10' : 'border-border-light',
+							)}
+						>
+							{trustStats.map(({ value, label }, i) => (
+								<div key={i} className="flex flex-col gap-0.5">
+									<span
+										className={cn(
+											'font-display text-2xl leading-none font-semibold tracking-tight',
+											isDark ? 'text-canvas' : 'text-ink',
+										)}
+									>
+										{value}
+									</span>
+									<span
+										className={cn(
+											'technical',
+											isDark ? 'text-canvas/40' : 'text-ink/40',
+										)}
+									>
+										{label}
+									</span>
+								</div>
+							))}
+						</div>
+					)}
+				</div>
+			</section>
+		)
+	}
+
+	// ── Full layout (default) ─────────────────────────────────────────────────
 	return (
 		<section
 			className={cn(
-				hasImage &&
-					'bg-ink text-canvas grid overflow-hidden *:col-span-full *:row-span-full',
+				hasImage && isDark
+					? 'bg-ink text-canvas grid overflow-hidden *:col-span-full *:row-span-full'
+					: hasImage
+						? 'grid overflow-hidden *:col-span-full *:row-span-full'
+						: isDark
+							? 'bg-ink text-canvas'
+							: '',
 			)}
 			{...moduleProps(props)}
 		>
@@ -52,7 +193,7 @@ export default function Hero({
 					<div
 						className={cn(
 							'richtext headings:text-balance relative isolate max-w-xl',
-							hasImage && 'text-shadow',
+							hasImage && isDark && 'text-shadow',
 							{
 								'mb-8': alignItems === 'start',
 								'my-auto': alignItems === 'center',
@@ -64,7 +205,7 @@ export default function Hero({
 						)}
 						style={{ textAlign }}
 					>
-						<Pretitle className={cn(hasImage && 'text-canvas/70')}>
+						<Pretitle className={cn(hasImage && isDark && 'text-canvas/70')}>
 							{pretitle}
 						</Pretitle>
 
@@ -77,7 +218,7 @@ export default function Hero({
 										<Reputation
 											className={cn(
 												'!mt-4',
-												hasImage && '[&_strong]:text-amber-400',
+												hasImage && isDark && '[&_strong]:text-amber-400',
 												{
 													'justify-start': ['left', 'start'].includes(
 														textAlign,

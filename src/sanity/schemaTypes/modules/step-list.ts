@@ -26,6 +26,7 @@ export default defineType({
 					name: 'step',
 					icon: VscListOrdered,
 					fields: [
+						defineField({ name: 'title', type: 'string' }),
 						defineField({
 							name: 'content',
 							type: 'array',
@@ -34,10 +35,11 @@ export default defineType({
 					],
 					preview: {
 						select: {
+							title: 'title',
 							content: 'content',
 						},
-						prepare: ({ content }) => ({
-							title: getBlockText(content),
+						prepare: ({ title, content }) => ({
+							title: title || getBlockText(content),
 						}),
 					},
 				}),

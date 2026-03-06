@@ -1,13 +1,12 @@
 import Pretitle from '@/ui/Pretitle'
-import { PortableText, stegaClean } from 'next-sanity'
-import Icon, { getPixels } from '@/ui/Icon'
+import { PortableText } from 'next-sanity'
+import Icon from '@/ui/Icon'
 import { cn } from '@/lib/utils'
 
 export default function FlagList({
 	pretitle,
 	intro,
 	items,
-	iconPosition,
 }: Partial<{
 	pretitle: string
 	intro: any
@@ -15,42 +14,57 @@ export default function FlagList({
 		icon: Sanity.Icon
 		content: any
 	}[]
-	iconPosition: 'top' | 'left'
 }>) {
 	return (
-		<section className="section space-y-8">
+		<section className="section-pad bg-canvas-warm">
 			{(pretitle || intro) && (
-				<header className="richtext mx-auto max-w-xl text-center text-balance">
+				<header className="richtext mb-16 max-w-xl text-balance">
 					<Pretitle>{pretitle}</Pretitle>
 					<PortableText value={intro} />
 				</header>
 			)}
 
-			<div className="grid items-start gap-x-8 gap-y-6 md:grid-cols-[repeat(auto-fit,minmax(200px,1fr))]">
+			<div className="border-border bg-border grid grid-cols-2 gap-px border sm:grid-cols-4">
 				{items?.map(({ icon, content }, key) => (
 					<article
-						className={cn(
-							'grid gap-4',
-							stegaClean(iconPosition) === 'left' &&
-								icon &&
-								'grid-cols-[var(--size)_1fr]',
-						)}
-						style={
-							{
-								'--size': icon?.size ?? '40px',
-							} as React.CSSProperties
-						}
 						key={key}
+						className="group bg-canvas-warm hover:bg-canvas-white relative flex flex-col gap-3 overflow-hidden px-7 py-9 transition-colors"
 					>
+						{/* Left accent bar — scales up from bottom on hover */}
+						<span className="bg-accent absolute inset-y-0 left-0 w-0.5 origin-bottom scale-y-0 transition-transform duration-300 group-hover:scale-y-100" />
+
 						{icon && (
-							<figure style={{ height: getPixels(icon?.size) }}>
+							<span className="text-2xl leading-none">
 								<Icon icon={icon} />
-							</figure>
+							</span>
 						)}
 
-						<div className="richtext">
-							<PortableText value={content} />
-						</div>
+						<PortableText
+							value={content}
+							components={{
+								block: {
+									h3: ({ children }) => (
+										<h3 className="font-display text-ink text-lg leading-tight font-semibold">
+											{children}
+										</h3>
+									),
+									h4: ({ children }) => (
+										<h4 className="font-display text-ink text-lg leading-tight font-semibold">
+											{children}
+										</h4>
+									),
+									normal: ({ children }) => (
+										<p
+											className={cn(
+												'text-ink/70 text-sm leading-relaxed font-light',
+											)}
+										>
+											{children}
+										</p>
+									),
+								},
+							}}
+						/>
 					</article>
 				))}
 			</div>

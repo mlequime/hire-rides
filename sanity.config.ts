@@ -23,7 +23,7 @@ import resolveUrl from '@/lib/resolveUrl'
 const singletonTypes = ['site']
 
 export default defineConfig({
-	title: 'SanityPress',
+	title: 'Hire Fairground Rides',
 	icon,
 	projectId,
 	dataset,
