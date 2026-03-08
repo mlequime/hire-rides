@@ -2,17 +2,22 @@ import { PortableText } from 'next-sanity'
 import CTAList from '@/ui/CTAList'
 import Code from './RichtextModule/Code'
 import Reputation from '@/ui/Reputation'
+import Pretitle from '@/ui/Pretitle'
 
 export default function Callout({
+	pretitle,
 	content,
 	ctas,
 }: Partial<{
+	pretitle: string
 	content: any
 	ctas: Sanity.CTA[]
 }>) {
 	return (
 		<section className="section text-center">
 			<div className="section bg-accent/3 max-w-screen-lg rounded">
+				{pretitle && <Pretitle className="mb-4">{pretitle}</Pretitle>}
+
 				<div className="richtext mx-auto max-w-screen-sm text-balance">
 					<PortableText
 						value={content}

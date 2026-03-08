@@ -1,10 +1,12 @@
 import moduleProps from '@/lib/moduleProps'
 import TableOfContents from './TableOfContents'
 import Content from './Content'
+import Pretitle from '@/ui/Pretitle'
 import { cn } from '@/lib/utils'
 import { stegaClean } from 'next-sanity'
 
 export default function RichtextModule({
+	pretitle,
 	content,
 	tableOfContents,
 	tocPosition = 'right',
@@ -12,6 +14,7 @@ export default function RichtextModule({
 	headings,
 	...props
 }: Partial<{
+	pretitle: string
 	content: any
 	tableOfContents: boolean
 	tocPosition: 'left' | 'right'
@@ -33,6 +36,8 @@ export default function RichtextModule({
 			)}
 			{...moduleProps(props)}
 		>
+			{pretitle && <Pretitle className="col-span-full">{pretitle}</Pretitle>}
+
 			{tableOfContents && (
 				<aside
 					className={cn(

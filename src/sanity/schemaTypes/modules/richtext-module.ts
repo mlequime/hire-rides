@@ -20,6 +20,11 @@ export default defineType({
 			group: 'options',
 		}),
 		defineField({
+			name: 'pretitle',
+			type: 'string',
+			group: 'content',
+		}),
+		defineField({
 			name: 'content',
 			type: 'array',
 			of: [

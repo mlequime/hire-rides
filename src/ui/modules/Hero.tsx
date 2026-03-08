@@ -73,16 +73,14 @@ export default function Hero({
 						isDark ? 'text-canvas' : 'text-ink',
 					)}
 				>
-					{pretitle && (
-						<p
-							className={cn(
-								'eyebrow mb-10',
-								isDark ? 'text-gold/75 [&::before]:bg-gold/70' : '',
-							)}
-						>
-							{stegaClean(pretitle)}
-						</p>
-					)}
+					<Pretitle
+						className={cn(
+							'eyebrow mb-10',
+							isDark ? 'text-gold/75 [&::before]:bg-gold/70' : '',
+						)}
+					>
+						{pretitle}
+					</Pretitle>
 
 					{content && (
 						<PortableText
