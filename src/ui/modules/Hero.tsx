@@ -74,10 +74,7 @@ export default function Hero({
 					)}
 				>
 					<Pretitle
-						className={cn(
-							'eyebrow mb-10',
-							isDark ? 'text-gold/75 [&::before]:bg-gold/70' : '',
-						)}
+						className={isDark ? 'text-gold/75 [&::before]:bg-gold/70' : ''}
 					>
 						{pretitle}
 					</Pretitle>

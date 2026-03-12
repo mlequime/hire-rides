@@ -82,26 +82,6 @@ export default defineType({
 			group: 'asset',
 		}),
 		defineField({
-			name: 'trustStats',
-			title: 'Trust stats',
-			description: 'Stat items shown below CTAs in split layout',
-			type: 'array',
-			of: [
-				defineArrayMember({
-					type: 'object',
-					fields: [
-						defineField({ name: 'value', type: 'string' }),
-						defineField({ name: 'label', type: 'string' }),
-					],
-					preview: {
-						select: { value: 'value', label: 'label' },
-						prepare: ({ value, label }) => ({ title: value, subtitle: label }),
-					},
-				}),
-			],
-			group: 'content',
-		}),
-		defineField({
 			...(alignItems as any),
 			fieldset: 'alignment',
 			group: 'options',
