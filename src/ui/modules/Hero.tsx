@@ -48,7 +48,7 @@ export default function Hero({
 				{hasImage && (
 					<ResponsiveImg
 						img={asset}
-						className="absolute inset-0 size-full object-cover object-center"
+						className="absolute inset-0 size-full object-cover object-bottom lg:object-center"
 						width={2400}
 						draggable={false}
 					/>
@@ -60,8 +60,8 @@ export default function Hero({
 						className="pointer-events-none absolute inset-0 z-[1]"
 						style={{
 							background: isDark
-								? 'linear-gradient(to right, #1a1208 25%, rgba(26,18,8,0.85) 45%, rgba(26,18,8,0) 70%)'
-								: 'linear-gradient(to right, #f8f5ef 25%, rgba(248,245,239,0.9) 45%, rgba(248,245,239,0) 70%)',
+								? 'lg:linear-gradient(to right, #1a1208 25%, rgba(26,18,8,0.85) 45%, rgba(26,18,8,0) 70%)'
+								: 'lg:linear-gradient(to right, #f8f5ef 25%, rgba(248,245,239,0.9) 45%, rgba(248,245,239,0) 70%)',
 						}}
 					/>
 				)}
