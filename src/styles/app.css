@@ -635,7 +635,7 @@
 @utility section {
 	@apply mx-auto p-8 max-md:px-4 md:py-12;
 
-	&:nth-child(even) {
+	&:nth-of-type(even) {
 		@apply bg-canvas-white;
 		border-top: 3px solid;
 		border-bottom: 3px solid;
