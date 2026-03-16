@@ -73,7 +73,7 @@ export default function HeroSplit({
 			{!!trustStats?.length && (
 				<div
 					className={cn(
-						'border-border-light mt-4 flex flex-wrap items-center justify-center gap-8 border-t pt-8',
+						'border-border-light mt-4 grid grid-cols-2 items-center justify-center gap-8 border-t pt-8 lg:flex lg:flex-wrap',
 					)}
 				>
 					{trustStats.map(({ value, label }, i) => (
